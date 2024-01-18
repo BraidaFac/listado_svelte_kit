@@ -18,7 +18,7 @@
                     <th>Marca</th>
                     <th>Tipo Articulo</th>
                     <th>Clase</th>
-                  <!--   <th>Detalle</th>
+                     <th>Detalle</th>
                     <th>Activo</th>
                     <th>Stock Negativo</th>
                     <th>Fecha Vencimiento</th>
@@ -26,7 +26,7 @@
                     <th>Codigo Barra</th>
                     <th>Fecha Alta</th>
                     <th>Publicado Web</th>
-                    <th>Destacado Web</th> -->
+                    <th>Destacado Web</th> 
 				</tr>
 			</thead>
 			<tbody>
@@ -38,7 +38,7 @@
                         <td>{item.marca}</td>
                         <td>{item.tipo_articulo}</td>
                         <td>{item.clase}</td>
-                        <!-- <td>{item.detalle}</td>
+                        <td>{item.detalle}</td>
                         <td>{item.activo}</td>
                         <td>{item.stock_negativo}</td>
                         <td>{item.fecha_vencimiento}</td>
@@ -46,7 +46,7 @@
                         <td>{item.codigo_barra}</td>
                         <td>{item.fecha_alta}</td>
                         <td>{item.publicado_web}</td>
-                        <td>{item.destacado_web}</td> -->
+                        <td>{item.destacado_web}</td>
 					</tr>
 				{/each}
 			</tbody>

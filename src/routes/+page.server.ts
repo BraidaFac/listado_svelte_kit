@@ -24,7 +24,7 @@ export const load: PageServerLoad = async ({fetch}) => {
                 destacado_web : columns[13],   
             }
         });
-       return { rows : array.slice(0, 2500)}
+       return { rows : array.slice(0, 40000)}
     }
 
     
