@@ -1,5 +1,6 @@
 import type { PageServerLoad } from './$types';
 import { API_ENDPOINT, TOKEN } from '$env/static/private';
+import type { Actions } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ fetch }) => {
 	const date_now = new Date();
@@ -22,29 +23,6 @@ export const load: PageServerLoad = async ({ fetch }) => {
 	);
 	const data = await response.json();
 	const ventas = data.data;
-	const detalles_ventas = [];
-	const fetchComprobanteDetalle = async (venta) => {
-		const response = await fetch(
-			`${API_ENDPOINT}/detallecomprobantesventas?numerocomprobante=${venta.numerocomprobante}`,
-			{
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: TOKEN
-				}
-			}
-		);
 
-		const items = await response.json();
-		return items.data;
-	};
-	for (let i = 0; i < ventas.length; i++) {
-		const venta = ventas[i];
-		const detalle = await fetchComprobanteDetalle(venta);
-		detalles_ventas.push(detalle);
-	}
-
-	return {
-		detalles_ventas
-	};
+	return { info: ventas };
 };
