@@ -2,7 +2,7 @@ import type { PageServerLoad } from './$types';
 import { API_ENDPOINT, TOKEN } from '$env/static/private';
 
 export const load: PageServerLoad = async ({ fetch }) => {
-	const response = await fetch(`${API_ENDPOINT}/familias?limit=1000`, {
+	const response = await fetch(`${API_ENDPOINT}/familias`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
@@ -10,6 +10,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 		}
 	});
 	const data = (await response.json()).data;
+	console.log(data);
 
 	return {
 		info: data

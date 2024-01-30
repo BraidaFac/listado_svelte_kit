@@ -10,7 +10,8 @@ export const load: PageServerLoad = async ({ fetch }) => {
 		}
 	});
 	const data = (await response.json()).data;
-
+	co);
+	
 	return {
 		info: data
 	};
