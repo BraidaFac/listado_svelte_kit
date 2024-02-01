@@ -1,5 +1,6 @@
 import type { PageServerLoad } from './$types';
 import { API_ENDPOINT, TOKEN } from '$env/static/private';
+import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ fetch }) => {
 	const date_now = new Date();
@@ -11,7 +12,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 	const until_date_string = until_date.toISOString().split('T')[0];
 
 	const response = await fetch(
-		`${API_ENDPOINT}/ventas?limit=1000&fechadesde=${since_date_string}&fechahasta=${until_date_string}`,
+		`${API_ENDPOINT}/ventas?limit=500&fechadesde=${since_date_string}&fechahasta=${until_date_string}`,
 		{
 			method: 'GET',
 			headers: {
@@ -20,8 +21,14 @@ export const load: PageServerLoad = async ({ fetch }) => {
 			}
 		}
 	);
+	if (response.status !== 200) {
+		error(500, {
+			message: 'Failed to fetch data from API'
+		});
+	}
 	const data = await response.json();
 	const ventas = data.data;
+	console.log(ventas.length);
 
 	return {
 		info: ventas

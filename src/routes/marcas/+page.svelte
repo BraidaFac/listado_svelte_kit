@@ -14,9 +14,6 @@
      
 </script>
 <div>
-{#if !rows  }
-        <p>Loading...</p>
-{:else }
 <table class="table">
 			<thead>
 				<tr>
@@ -35,7 +32,6 @@
 				{/each}
 			</tbody> 
 		</table>
-{/if }
 
 
 </div>

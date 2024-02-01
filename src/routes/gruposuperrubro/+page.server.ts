@@ -1,15 +1,20 @@
-import type { PageServerLoad } from './marcas/$types';
-import { API_ENDPOINT } from '$env/static/private';
+import type { PageServerLoad } from './$types';
+import { API_ENDPOINT, TOKEN } from '$env/static/private';
+import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ fetch }) => {
-	const response = await fetch(`${API_ENDPOINT}/gruposuperrubros?limit=1000`, {
+	const response = await fetch(`${API_ENDPOINT}/gruposuperrubros`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization:
-				'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOnsidXVpZCI6IjQ5NTM0NTczNDg5NTczNDg5NzUiLCJpc0FkbWluIjpmYWxzZSwidXNlcklkIjoiQURNSU4ifSwiaWF0IjoxNzA2NTY2NTkwLCJleHAiOjE3MDY2NTI5OTB9.jqW7VRTOiFhtuXpKlyMXOiMfuXCtWy1ldDfW3XPHQ-s'
+			Authorization: TOKEN
 		}
 	});
+	if (response.status !== 200) {
+		error(500, {
+			message: 'Failed to fetch data from API'
+		});
+	}
 	const data = (await response.json()).data;
 
 	return {

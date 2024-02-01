@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
 import { API_ENDPOINT, TOKEN } from '$env/static/private';
-import type { Actions } from '@sveltejs/kit';
+import { error, type Actions } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ fetch }) => {
 	const date_now = new Date();
@@ -21,6 +21,11 @@ export const load: PageServerLoad = async ({ fetch }) => {
 			}
 		}
 	);
+	if (response.status !== 200) {
+		error(500, {
+			message: 'Failed to fetch data from API'
+		});
+	}
 	const data = await response.json();
 	const ventas = data.data;
 
