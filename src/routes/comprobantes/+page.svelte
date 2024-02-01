@@ -7,19 +7,19 @@
 	let loading= true;
 	onMount(async () => {
 	 try {
-			const promises = ventas.map(async (venta) => {
-			const response = await fetch(`http://localhost:5173/api?numero_comprobante=${venta.numerocomprobante}`);
-			return response.json();
-    });
-    const detallesArray = await Promise.all(promises);
-    detalles_ventas = detallesArray.reduce((acc, detalle) => [...acc, ...detalle], []);
-	loading= false;
-  } catch (error) {
+		for(let i=0; i<ventas.length; i++){
+			const response = await fetch(`http://localhost:5173/api?numero_comprobante=${ventas[i].numerocomprobante}`);
+			const detalles = await response.json();
+			detalles_ventas.push(detalles);
+		}
+		detalles_ventas = detalles_ventas.reduce((acc, detalle) => [...acc, ...detalle], []);
+		loading= false;
+			
+    } catch (error) {
   }
 	})
 	
 	let header_row = {};
-	let rows = [];
 $:{
 	if (detalles_ventas.length > 0) {
       header_row = detalles_ventas.reduce((acc, row) => Object.keys(row).length > Object.keys(acc).length ? row : acc, {});
