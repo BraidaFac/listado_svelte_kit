@@ -13,17 +13,16 @@
     });
     const detallesArray = await Promise.all(promises);
     detalles_ventas = detallesArray.reduce((acc, detalle) => [...acc, ...detalle], []);
+	loading= false;
   } catch (error) {
-    console.error('Error al realizar las solicitudes:', error);
   }
-	loading= false;})
+	})
 	
 	let header_row = {};
 	let rows = [];
 $:{
 	if (detalles_ventas.length > 0) {
-      rows = [].concat(...detalles_ventas);
-      header_row = rows.reduce((acc, row) => Object.keys(row).length > Object.keys(acc).length ? row : acc, {});
+      header_row = detalles_ventas.reduce((acc, row) => Object.keys(row).length > Object.keys(acc).length ? row : acc, {});
     }
 }
 
@@ -41,7 +40,7 @@ $:{
 				</tr>
 			</thead>
 			 <tbody>
-				{#each rows as item }
+				{#each detalles_ventas as item }
 					<tr>
 						{#each Object.values(item) as value}
                             <td>{value}</td>
