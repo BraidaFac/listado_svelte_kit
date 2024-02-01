@@ -5,6 +5,7 @@
     export let data: PageData;
 	
 	const {info}= data;
+	
 	const rows = info
     let header_row = rows[0];
     rows.forEach((row: any) => {
@@ -14,9 +15,7 @@
      
 </script>
 <div>
-{#if !rows  }
-        <p>Loading...</p>
-{:else }
+
 <table class="table">
 			<thead>
 				<tr>
@@ -39,7 +38,6 @@
 				{/each}
 			</tbody> 
 		</table>
-{/if }
 
 
 </div>

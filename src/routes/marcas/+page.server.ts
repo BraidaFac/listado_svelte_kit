@@ -1,7 +1,6 @@
 import type { PageServerLoad } from './$types';
 import { API_ENDPOINT, TOKEN } from '$env/static/private';
 import { error } from '@sveltejs/kit';
-
 export const load: PageServerLoad = async ({ fetch }) => {
 	const response = await fetch(`${API_ENDPOINT}/marcas?limit=200`, {
 		method: 'GET',

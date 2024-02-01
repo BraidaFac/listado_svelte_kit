@@ -5,7 +5,7 @@ import { error } from '@sveltejs/kit';
 export const load: PageServerLoad = async ({ fetch }) => {
 	const date_now = new Date();
 	const since_date = new Date(date_now);
-	since_date.setDate(since_date.getDate() - 20);
+	since_date.setDate(since_date.getDate() - 15);
 	const until_date = new Date(date_now);
 
 	const since_date_string = since_date.toISOString().split('T')[0];
@@ -28,7 +28,6 @@ export const load: PageServerLoad = async ({ fetch }) => {
 	}
 	const data = await response.json();
 	const ventas = data.data;
-	console.log(ventas.length);
 
 	return {
 		info: ventas

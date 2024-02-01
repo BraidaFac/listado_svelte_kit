@@ -14,8 +14,8 @@
      
 </script>
 <div>
-{#if !rows  }
-        <p>Loading...</p>
+{#if !rows || rows.length===0}  
+        <p>No hay datos</p>
 {:else }
 <table class="table">
 			<thead>
